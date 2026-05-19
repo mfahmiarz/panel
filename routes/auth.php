@@ -19,6 +19,10 @@ Route::get('/register', [Auth\RegisterController::class, 'index'])->name('auth.r
 Route::get('/password', [Auth\LoginController::class, 'index'])->name('auth.forgot-password');
 Route::get('/password/reset/{token}', [Auth\LoginController::class, 'index'])->name('auth.reset');
 
+Route::get('/sso/login', [Auth\BillingSsoLoginController::class, 'login'])
+    ->withoutMiddleware('guest')
+    ->name('auth.sso.login');
+
 // Apply a throttle to authentication action endpoints, in addition to the
 // recaptcha endpoints to slow down manual attack spammers even more. 🤷‍
 //

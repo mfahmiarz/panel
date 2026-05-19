@@ -106,6 +106,18 @@ Route::group(['prefix' => '/servers'], function () {
 
 /*
 |--------------------------------------------------------------------------
+| SSO Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /api/application/sso
+|
+*/
+Route::group(['prefix' => '/sso'], function () {
+    Route::post('/token', [Application\Sso\BillingSsoTokenController::class, 'issue'])->name('api.application.sso.token');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Nest Controller Routes
 |--------------------------------------------------------------------------
 |
