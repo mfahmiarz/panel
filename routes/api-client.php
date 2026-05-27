@@ -148,6 +148,78 @@ Route::group([
         Route::put('/variable', [Client\Servers\StartupController::class, 'update']);
     });
 
+    Route::group(['prefix' => '/minecraft/modpacks'], function () {
+        Route::get('/', [Client\Servers\Minecraft\Modpacks\ModpackController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Minecraft\Modpacks\ModpackController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Minecraft\Modpacks\ModpackController::class, 'install']);
+    });
+
+    Route::group(['prefix' => '/minecraft/plugins'], function () {
+        Route::get('/', [Client\Servers\Minecraft\Plugins\PluginController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Minecraft\Plugins\PluginController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Minecraft\Plugins\PluginController::class, 'install']);
+        Route::get('/installed', [Client\Servers\Minecraft\Plugins\PluginController::class, 'installed']);
+        Route::delete('/installed/{plugin_id}', [Client\Servers\Minecraft\Plugins\PluginController::class, 'uninstall']);
+    });
+
+    Route::group(['prefix' => '/minecraft/mods'], function () {
+        Route::get('/', [Client\Servers\Minecraft\Mods\ModController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Minecraft\Mods\ModController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Minecraft\Mods\ModController::class, 'install']);
+        Route::get('/installed', [Client\Servers\Minecraft\Mods\ModController::class, 'installed']);
+        Route::delete('/installed/{mod_id}', [Client\Servers\Minecraft\Mods\ModController::class, 'uninstall']);
+    });
+
+    Route::group(['prefix' => '/minecraft/worlds'], function () {
+        Route::get('/', [Client\Servers\Minecraft\Worlds\WorldController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Minecraft\Worlds\WorldController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Minecraft\Worlds\WorldController::class, 'install']);
+        Route::get('/installed', [Client\Servers\Minecraft\Worlds\WorldController::class, 'installed']);
+        Route::post('/installed/active', [Client\Servers\Minecraft\Worlds\WorldController::class, 'setActive']);
+        Route::delete('/installed/{world_id}', [Client\Servers\Minecraft\Worlds\WorldController::class, 'uninstall']);
+    });
+
+    Route::group(['prefix' => '/minecraft/vanillatweaks'], function () {
+        Route::get('/', [Client\Servers\Minecraft\VanillaTweaks\VanillaTweaksController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Minecraft\VanillaTweaks\VanillaTweaksController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Minecraft\VanillaTweaks\VanillaTweaksController::class, 'install']);
+    });
+
+    Route::group(['prefix' => '/minecraft/versions'], function () {
+        Route::get('/current', [Client\Servers\Minecraft\Versions\VersionController::class, 'current']);
+        Route::post('/install', [Client\Servers\Minecraft\Versions\VersionController::class, 'install']);
+    });
+
+    Route::group(['prefix' => '/bedrock/versions'], function () {
+        Route::get('/current', [Client\Servers\Bedrock\Versions\VersionController::class, 'current']);
+        Route::post('/install', [Client\Servers\Bedrock\Versions\VersionController::class, 'install']);
+    });
+
+    Route::group(['prefix' => '/bedrock/addons'], function () {
+        Route::get('/', [Client\Servers\Bedrock\Addons\AddonController::class, 'index']);
+        Route::get('/versions', [Client\Servers\Bedrock\Addons\AddonController::class, 'versions']);
+        Route::post('/install', [Client\Servers\Bedrock\Addons\AddonController::class, 'install']);
+        Route::get('/install-status', [Client\Servers\Bedrock\Addons\AddonController::class, 'installStatus']);
+        Route::get('/icon', [Client\Servers\Bedrock\Addons\AddonController::class, 'icon']);
+        Route::post('/delete', [Client\Servers\Bedrock\Addons\AddonController::class, 'deletePack']);
+        Route::get('/packs', [Client\Servers\Bedrock\Addons\AddonController::class, 'getPacks']);
+        Route::post('/packs', [Client\Servers\Bedrock\Addons\AddonController::class, 'savePacks']);
+        Route::post('/world', [Client\Servers\Bedrock\Addons\AddonController::class, 'setWorld']);
+    });
+
+    Route::group(['prefix' => '/bedrock/config'], function () {
+        Route::get('/properties', [Client\Servers\Bedrock\Config\ConfigController::class, 'getProperties']);
+        Route::post('/properties', [Client\Servers\Bedrock\Config\ConfigController::class, 'saveProperties']);
+        Route::get('/worlds', [Client\Servers\Bedrock\Config\ConfigController::class, 'getWorlds']);
+        Route::get('/experiments', [Client\Servers\Bedrock\Config\ConfigController::class, 'getExperiments']);
+        Route::post('/experiments', [Client\Servers\Bedrock\Config\ConfigController::class, 'saveExperiments']);
+        Route::get('/experiments/available', [Client\Servers\Bedrock\Config\ConfigController::class, 'getAvailableExperiments']);
+        Route::get('/world-settings', [Client\Servers\Bedrock\Config\ConfigController::class, 'getWorldSettings']);
+        Route::post('/world-settings', [Client\Servers\Bedrock\Config\ConfigController::class, 'saveWorldSettings']);
+        Route::get('/raw-nbt', [Client\Servers\Bedrock\Config\ConfigController::class, 'getRawNbt']);
+        Route::get('/verify-leveldat', [Client\Servers\Bedrock\Config\ConfigController::class, 'verifyLevelDat']);
+    });
+
     Route::group(['prefix' => '/settings'], function () {
         Route::post('/rename', [Client\Servers\SettingsController::class, 'rename']);
         Route::post('/reinstall', [Client\Servers\SettingsController::class, 'reinstall']);

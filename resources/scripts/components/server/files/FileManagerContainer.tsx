@@ -30,6 +30,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import UploadFromUrl from './UploadFromUrl';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
+import IconChangerModal from '@/components/server/files/IconChangerModal';
 
 interface SortButtonProps {
     label: string;
@@ -174,6 +175,7 @@ export default () => {
                             <FileManagerStatus />
                             {selectedFilesLength < 1 ? 
                                 <Can action={'file.create'}>
+                                    <IconChangerModal />
                                     <NewDirectoryButton className={'flex items-center gap-2'} />
                                     <div className='relative'>
                                         <div ref={uploadRef} >
@@ -194,7 +196,7 @@ export default () => {
                                             <LuFilePlus /> {t('new-file')}
                                         </Button>
                                     </NavLink>
-                                    {/* <div className='lg:block hidden'>
+                                    <div className='lg:block hidden'>
                                         <Tooltip content={`${t('open-code-editor')}`} placement={'top'}>
                                             <NavLink to={`files/code-editor`}>
                                                 <Button.Text className={'h-10 flex items-center gap-2'}>
@@ -202,7 +204,7 @@ export default () => {
                                                 </Button.Text>
                                             </NavLink>
                                         </Tooltip>
-                                    </div> */}
+                                    </div>
                                 </Can>
                                 :
                                 <MassActionsBar />

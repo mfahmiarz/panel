@@ -24,6 +24,16 @@ import {
  } from "react-icons/ri";
 import CodeEditorContainer from '@/components/server/files/codeEditor/CodeEditorContainer';
 
+import ModpackContainer from '@/components/server/minecraft/modpacks/ModpackContainer';
+import PluginContainer from '@/components/server/minecraft/plugins/PluginContainer';
+import ModContainer from '@/components/server/minecraft/mods/ModContainer';
+import WorldContainer from '@/components/server/minecraft/worlds/WorldContainer';
+import VanillaTweaksContainer from '@/components/server/minecraft/vanillatweaks/VanillaTweaksContainer';
+import VersionContainer from '@/components/server/minecraft/versions/VersionContainer';
+import BedrockVersionContainer from '@/components/server/bedrock/versions/VersionContainer';
+import BedrockAddonContainer from '@/components/server/bedrock/addons/AddonContainer';
+import BedrockConfigContainer from '@/components/server/bedrock/config/ConfigEditorContainer';
+
 const FileEditContainer = lazy(() => import('@/components/server/files/FileEditContainer'));
 const ScheduleEditContainer = lazy(() => import('@/components/server/schedules/ScheduleEditContainer'));
 
@@ -145,22 +155,73 @@ export default {
                 name: undefined,
                 component: FullConsoleContainer,
             },
-            {
-                path: '/settings',
-                permission: ['settings.*', 'file.sftp'],
-                name: 'settings',
-                icon: [HiOutlineCog, HiCog, LuCog, RiSettings2Line, RiSettings2Fill],
-                component: SettingsContainer,
-            },
-            {
-                path: '/activity',
-                permission: 'activity.*',
-                name: 'activity',
-                icon: [HiOutlineEye, HiEye, LuEye, RiEyeLine, RiEyeFill],
-                component: ServerActivityLogContainer,
-            },
         ],
         management: [
+            {
+                path: '/minecraft/modpacks',
+                permission: 'file.create',
+                name: 'Modpacks',
+                component: ModpackContainer,
+                eggId: 15,
+            },
+            {
+                path: '/minecraft/plugins',
+                permission: 'file.create',
+                name: 'Plugins',
+                component: PluginContainer,
+                eggId: 15,
+            },
+            {
+                path: '/minecraft/mods',
+                permission: 'file.create',
+                name: 'Mods',
+                component: ModContainer,
+                eggId: 15,
+            },
+            {
+                path: '/minecraft/worlds',
+                permission: 'file.create',
+                name: 'Worlds',
+                component: WorldContainer,
+                eggId: 15,
+            },
+            {
+                path: '/minecraft/vanillatweaks',
+                permission: 'file.create',
+                name: 'Vanilla Tweaks',
+                component: VanillaTweaksContainer,
+                eggId: 15,
+            },
+            {
+                path: '/minecraft/versions',
+                permission: 'file.create',
+                name: 'Versions',
+                component: VersionContainer,
+                eggId: 15,
+            },
+            {
+                path: '/bedrock/versions',
+                permission: 'file.create',
+                name: 'Versions',
+                component: BedrockVersionContainer,
+                eggId: 19,
+            },
+            {
+                path: '/bedrock/addons',
+                permission: 'file.create',
+                name: 'Addons',
+                component: BedrockAddonContainer,
+                eggId: 19,
+            },
+            {
+                path: '/bedrock/configs',
+                permission: 'file.create',
+                name: 'Configs',
+                component: BedrockConfigContainer,
+                eggId: 19,
+            },
+        ],
+        configuration: [
             {
                 path: '/files',
                 permission: 'file.*',
@@ -201,8 +262,6 @@ export default {
                 icon: [HiOutlineGlobe, HiGlobe, LuGlobe, RiGlobalLine, RiGlobalFill],
                 component: NetworkContainer,
             },
-        ],
-        configuration: [
             {
                 path: '/schedules',
                 permission: 'schedule.*',
@@ -229,6 +288,20 @@ export default {
                 name: 'startup',
                 icon: [HiOutlineAdjustments, HiAdjustments, LuSlidersVertical, RiSoundModuleLine, RiSoundModuleFill],
                 component: StartupContainer,
+            },
+            {
+                path: '/settings',
+                permission: ['settings.*', 'file.sftp'],
+                name: 'settings',
+                icon: [HiOutlineCog, HiCog, LuCog, RiSettings2Line, RiSettings2Fill],
+                component: SettingsContainer,
+            },
+            {
+                path: '/activity',
+                permission: 'activity.*',
+                name: 'activity',
+                icon: [HiOutlineEye, HiEye, LuEye, RiEyeLine, RiEyeFill],
+                component: ServerActivityLogContainer,
             },
         ]
     }
